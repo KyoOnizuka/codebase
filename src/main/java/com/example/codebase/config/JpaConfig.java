@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Properties;
 
 @Configuration
-public class JpaConfig {
+public class JpaConfig {/*
     @Bean("entityManager")
     public EntityManagerFactory entityManagerFactory() {
         Map<String, String> properties = new HashMap<>();
@@ -61,5 +61,5 @@ public class JpaConfig {
         em.setJpaProperties(properties);
 
         return em;
-    }
+    }*/
 }

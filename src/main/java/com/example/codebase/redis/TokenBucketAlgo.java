@@ -9,17 +9,22 @@ import redis.clients.jedis.JedisPooled;
 //
 //2.change to java date util
 public class TokenBucketAlgo {
-    public static boolean limitChecking(String userId, Integer intervalInSeconds, Integer maximumRequests){
-        JedisPooled  jedis = new JedisPooled("localhost", 6379);
+    TokenBucketAlgo(){
+        this.jedis = new JedisPooled("localhost", 6379);
+    }
+    JedisPooled  jedis;
+    public boolean allow(String userId, Integer intervalInSeconds, Integer maximumRequests){
 
-        if (jedis.get(userId+"_lastRequest") == null){
-            jedis.setex(userId+"_counter", intervalInSeconds, String.valueOf(maximumRequests - 1));
-            jedis.setex(userId + "_lastRequest", intervalInSeconds, String.valueOf(Instant.now().getEpochSecond()));
+        if (jedis.get(userId+"_counter") == null){
+            refill(userId, intervalInSeconds, maximumRequests);
         } else {
             var token = jedis.decr(userId+"_counter");
-            System.out.print(token);
             return token >= 0;
         }
         return true;
+    }
+
+    private void refill(String key, Integer intervalInSeconds, Integer maximumRequests){
+        jedis.setex(key+"_counter", intervalInSeconds, String.valueOf(maximumRequests - 1));
     }
 }
