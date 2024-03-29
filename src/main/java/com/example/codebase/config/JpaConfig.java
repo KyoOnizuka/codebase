@@ -1,5 +1,6 @@
 package com.example.codebase.config;
 
+import com.example.codebase.redis.LeakingBucketAlgo;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +19,13 @@ import java.util.Map;
 import java.util.Properties;
 
 @Configuration
-public class JpaConfig {/*
+public class JpaConfig {
+
+    @Bean
+    public LeakingBucketAlgo myBean(){
+        return new LeakingBucketAlgo();
+    }
+    /*
     @Bean("entityManager")
     public EntityManagerFactory entityManagerFactory() {
         Map<String, String> properties = new HashMap<>();

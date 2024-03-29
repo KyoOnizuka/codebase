@@ -11,6 +11,7 @@ import org.springframework.context.annotation.ComponentScans;
 public class CodebaseApplication {
 
 	public static void main(String[] args) {
+		System.setProperty("spring.profiles.active", "DEV");
 		SpringApplication.run(CodebaseApplication.class, args);
 	}
 

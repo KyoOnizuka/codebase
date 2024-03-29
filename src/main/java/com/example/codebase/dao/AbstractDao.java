@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 public abstract class AbstractDao<T> {
+    public static void Main(String arrgs){
+        Sample a = new Sample(null, "b");
+        String b = a.name();
+
+    }
     protected Class<T> entityClass;
     EntityManager entityManager;
     public Optional<T> findByID(String Id){

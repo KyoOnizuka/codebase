@@ -14,7 +14,7 @@ public class TokenBucketAlgo {
     }
     JedisPooled  jedis;
     public boolean allow(String userId, Integer intervalInSeconds, Integer maximumRequests){
-
+        jedis.get(userId+"abc");
         if (jedis.get(userId+"_counter") == null){
             refill(userId, intervalInSeconds, maximumRequests);
         } else {
